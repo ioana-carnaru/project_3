@@ -10,6 +10,7 @@ public class FirstFrame extends Frames {
 
     SignInButton button;
 
+
     public FirstFrame() {
         super("Inventory Management", 400, 400);
         this.setLayout(new FlowLayout());
