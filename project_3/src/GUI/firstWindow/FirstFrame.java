@@ -1,16 +1,24 @@
 package GUI.firstWindow;
 
-import GUI.Frames;
+import GUI.AbstractClasses.Frames;
+
+import java.awt.*;
 
 public class FirstFrame extends Frames {
 
     public static FirstFrame frame;
 
-    public FirstFrame() {
-        super();
+    SignInButton button;
 
-        this.setTitle("Inventory Management");
-        this.setSize(300, 300);
+
+    public FirstFrame() {
+        super("Inventory Management", 400, 400);
+        this.setLayout(new FlowLayout());
+
+        button = new SignInButton("Sign In");
+
+        this.add(button);
+
         this.setVisible(true);
     }
 }
