@@ -17,7 +17,7 @@ public class SignInFrame extends Frames {
 
 
     private SignInFrame () {
-        super("Log in to an existing account", 300, 300);
+        super("Log to an existing account", 300, 300);
         this.setLayout(new GridLayout(7, 1));
 
         usernameLabel = new JLabel("Username:");

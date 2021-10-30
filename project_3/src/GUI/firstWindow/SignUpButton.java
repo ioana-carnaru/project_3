@@ -1,13 +1,13 @@
 package GUI.firstWindow;
 
 import GUI.AbstractClasses.Buttons;
-import GUI.signInWindow.SignInFrame;
+import GUI.SignUpWindow.SignUpFrame;
 
 import java.awt.event.ActionEvent;
 
-public class SignInButton extends Buttons {
+public class SignUpButton extends Buttons {
 
-    public SignInButton (String text) {
+    public SignUpButton (String text) {
         super(text);
         this.addActionListener(this);
     }
@@ -15,6 +15,6 @@ public class SignInButton extends Buttons {
     @Override
     public void actionPerformed(ActionEvent e) {
         FirstFrame.disposeFrame();
-        SignInFrame.getFrame();
+        SignUpFrame.getFrame();
     }
 }

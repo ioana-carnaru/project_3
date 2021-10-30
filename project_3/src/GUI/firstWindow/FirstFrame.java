@@ -8,15 +8,18 @@ public class FirstFrame extends Frames {
 
     private static FirstFrame frame;
 
-    SignInButton button;
+    SignInButton signInButton;
+    SignUpButton signUpButton;
 
     private FirstFrame() {
         super("Inventory Management", 400, 400);
         this.setLayout(new FlowLayout());
 
-        button = new SignInButton("Sign In");
+        signInButton = new SignInButton("Sign In");
+        signUpButton = new SignUpButton("Sign up");
 
-        this.add(button);
+        this.add(signInButton);
+        this.add(signUpButton);
 
         this.setVisible(true);
     }
