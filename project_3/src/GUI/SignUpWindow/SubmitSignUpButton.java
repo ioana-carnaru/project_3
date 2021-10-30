@@ -1,11 +1,22 @@
 package GUI.SignUpWindow;
 
 import GUI.AbstractClasses.Buttons;
-import GUI.signInWindow.SignInFrame;
 
 import java.awt.event.ActionEvent;
 
 public class SubmitSignUpButton extends Buttons {
+
+    public SubmitSignUpButton (String text) {
+        super(text);
+        this.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    /*
     private boolean _hasInput=false;
     private boolean _wantsToSignUp=false;
     String _user;
@@ -47,4 +58,8 @@ public class SubmitSignUpButton extends Buttons {
     {
         this._wantsToSignUp=wantsToSignUp;
     }
+
+     */
+
+
 }
