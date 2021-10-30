@@ -1,13 +1,15 @@
 package GUI.SignUpWindow;
 
 import GUI.AbstractClasses.Frames;
+import GUI.firstWindow.SignUpButton;
+import GUI.signInWindow.SubmitSignInButton;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SignUpFrame extends Frames {
 
-    private static SignUpFrame frame;
+    private static SignUpFrame signUpFrame;
 
     JLabel usernameLabel;
     JTextField usernameField;
@@ -35,14 +37,18 @@ public class SignUpFrame extends Frames {
     }
 
     public static SignUpFrame getFrame () {
-        if (frame == null)
-            frame = new SignUpFrame();
+        if ( signUpFrame == null)
+             signUpFrame = new SignUpFrame();
 
-        return frame;
+        return  signUpFrame;
     }
 
+    public SubmitSignUpButton getSubmitSignUpButton()
+    {
+        return   signUpFrame.submitSignUpButton;
+    }
     public static void disposeFrame () {
-        frame.dispose();
-        frame = null;
+        signUpFrame.dispose();
+        signUpFrame = null;
     }
 }

@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class SignInFrame extends Frames {
 
-    private static SignInFrame frame;
+    public static SignInFrame signInFrame;
 
     JLabel usernameLabel;
     JTextField usernameField;
@@ -36,14 +36,26 @@ public class SignInFrame extends Frames {
     }
 
     public static SignInFrame getFrame () {
-        if (frame == null)
-            frame = new SignInFrame();
+        if (signInFrame == null)
+            signInFrame = new SignInFrame();
 
-        return frame;
+        return signInFrame;
     }
 
     public static void disposeFrame () {
-        frame.dispose();
-        frame = null;
+        signInFrame.dispose();
+        signInFrame = null;
+    }
+    public SubmitSignInButton getSubmitSignInButton()
+    {
+        return submitSignInButton;
+    }
+    public JPasswordField getPasswordField()
+    {
+        return passwordField;
+    }
+    public JTextField getUsernameField()
+    {
+        return usernameField;
     }
 }
