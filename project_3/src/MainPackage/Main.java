@@ -15,14 +15,14 @@ public class Main {
         GUIThread guiThread = new GUIThread();
         SwingUtilities.invokeLater(guiThread);
 
-//        try {
-//            DatabaseClass db = DatabaseClass.getInstance();
-//            db.start();
-//        }
-//        catch(SQLException ex)
-//        {
-//            ex.printStackTrace();
-//        }
+      try {
+           DatabaseClass db = DatabaseClass.getInstance();
+          db.start();
+        }
+        catch(SQLException ex)
+      {
+           ex.printStackTrace();
+       }
     }
 
 }

@@ -2,6 +2,7 @@ package GUI.SignUpWindow;
 
 import DataStructures.Queue;
 import GUI.AbstractClasses.Buttons;
+import GUI.signInWindow.SignInFrame;
 
 import java.awt.event.ActionEvent;
 
@@ -24,13 +25,6 @@ public class SubmitSignUpButton extends Buttons {
             queue.enqueue(username);
             queue.enqueue(password);
         }
-
-        synchronized (queue) { // IT WORKS !!!!!
-            System.out.println(queue.dequeue());
-            System.out.println(queue.dequeue());
-            System.out.println(queue.dequeue());
-        }
-
     }
 
 }
