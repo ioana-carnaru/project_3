@@ -5,6 +5,18 @@ import GUI.AbstractClasses.Buttons;
 import java.awt.event.ActionEvent;
 
 public class SubmitSignInButton extends Buttons {
+
+    public SubmitSignInButton (String text) {
+        super(text);
+        this.addActionListener(this);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
+
+    /*
     private boolean _hasInput=false;
     private boolean _wantsToSignIn=false;
     String _user;
@@ -46,4 +58,5 @@ public class SubmitSignInButton extends Buttons {
     {
         this._wantsToSignIn=wantsToSignIn;
     }
+    */
 }
