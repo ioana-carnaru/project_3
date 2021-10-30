@@ -46,16 +46,5 @@ public class SignInFrame extends Frames {
         signInFrame.dispose();
         signInFrame = null;
     }
-    public SubmitSignInButton getSubmitSignInButton()
-    {
-        return submitSignInButton;
-    }
-    public JPasswordField getPasswordField()
-    {
-        return passwordField;
-    }
-    public JTextField getUsernameField()
-    {
-        return usernameField;
-    }
+
 }

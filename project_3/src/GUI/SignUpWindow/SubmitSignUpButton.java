@@ -1,8 +1,11 @@
 package GUI.SignUpWindow;
 
+import DataStructures.Queue;
 import GUI.AbstractClasses.Buttons;
 
 import java.awt.event.ActionEvent;
+
+import static MainPackage.Main.queue; // the transmission queue
 
 public class SubmitSignUpButton extends Buttons {
 
@@ -13,53 +16,21 @@ public class SubmitSignUpButton extends Buttons {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String username = SignUpFrame.getFrame().usernameField.getText();
+        String password = String.valueOf(SignUpFrame.getFrame().passwordField.getPassword());
+
+        synchronized (queue) {
+            queue.enqueue(Queue.newAccount);
+            queue.enqueue(username);
+            queue.enqueue(password);
+        }
+
+        synchronized (queue) { // IT WORKS !!!!!
+            System.out.println(queue.dequeue());
+            System.out.println(queue.dequeue());
+            System.out.println(queue.dequeue());
+        }
 
     }
-
-    /*
-    private boolean _hasInput=false;
-    private boolean _wantsToSignUp=false;
-    String _user;
-    String _password;
-    public SubmitSignUpButton (String text) {
-        super(text);
-        this.addActionListener(this);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        this._password=String.copyValueOf(SignInFrame.getFrame().getPasswordField().getPassword());
-        this._user=SignInFrame.getFrame().getUsernameField().getText();
-        this._hasInput=true;
-        this._wantsToSignUp=true;
-        System.out.println("Am apasat butonul de sign up");
-    }
-    public String getPassword()
-    {
-        return this._password;
-    }
-    public String getUser()
-    {
-        return this._user;
-    }
-    public boolean getHasInputForSignUp()
-    {
-        return this._hasInput;
-    }
-    public void set_hasInput(boolean hasInput)
-    {
-        this._hasInput=hasInput;
-    }
-    public boolean is_wantsToSignUp()
-    {
-        return this._wantsToSignUp;
-    }
-    public void set_wantsToSignUp(boolean wantsToSignUp)
-    {
-        this._wantsToSignUp=wantsToSignUp;
-    }
-
-     */
-
 
 }

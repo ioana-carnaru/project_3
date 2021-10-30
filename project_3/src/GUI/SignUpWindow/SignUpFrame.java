@@ -43,10 +43,6 @@ public class SignUpFrame extends Frames {
         return  signUpFrame;
     }
 
-    public SubmitSignUpButton getSubmitSignUpButton()
-    {
-        return   signUpFrame.submitSignUpButton;
-    }
     public static void disposeFrame () {
         signUpFrame.dispose();
         signUpFrame = null;

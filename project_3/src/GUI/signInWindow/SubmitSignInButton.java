@@ -1,8 +1,11 @@
 package GUI.signInWindow;
 
+import DataStructures.Queue;
 import GUI.AbstractClasses.Buttons;
 
 import java.awt.event.ActionEvent;
+
+import static MainPackage.Main.queue;
 
 public class SubmitSignInButton extends Buttons {
 
@@ -13,50 +16,20 @@ public class SubmitSignInButton extends Buttons {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String username = SignInFrame.getFrame().usernameField.getText();
+        String password = String.valueOf(SignInFrame.getFrame().passwordField.getPassword());
 
+        synchronized (queue) {
+            queue.enqueue(Queue.logIn);
+            queue.enqueue(username);
+            queue.enqueue(password);
+        }
+
+        synchronized (queue) { // IT WORKS !!!!!
+            System.out.println(queue.dequeue());
+            System.out.println(queue.dequeue());
+            System.out.println(queue.dequeue());
+        }
     }
 
-    /*
-    private boolean _hasInput=false;
-    private boolean _wantsToSignIn=false;
-    String _user;
-    String _password;
-    public SubmitSignInButton (String text) {
-        super(text);
-        this.addActionListener(this);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        this._password=String.copyValueOf(SignInFrame.getFrame().getPasswordField().getPassword());
-        this._user=SignInFrame.getFrame().getUsernameField().getText();
-        this._hasInput=true;
-        this._wantsToSignIn=true;
-        System.out.println("Am apasat butonul de sign in");
-    }
-    public String getPassword()
-    {
-        return this._password;
-    }
-    public String getUser()
-    {
-        return this._user;
-    }
-    public boolean getHasInput()
-    {
-        return this._hasInput;
-    }
-    public void set_hasInput(boolean hasInput)
-    {
-        this._hasInput=hasInput;
-    }
-    public boolean is_wantsToSignIn()
-    {
-        return this._wantsToSignIn;
-    }
-    public void set_wantsToSignIn(boolean wantsToSignIn)
-    {
-        this._wantsToSignIn=wantsToSignIn;
-    }
-    */
 }
