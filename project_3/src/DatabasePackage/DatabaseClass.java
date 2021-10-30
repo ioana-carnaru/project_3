@@ -53,6 +53,7 @@ public class DatabaseClass extends Thread{
         }
     }
     public void run() {
+        /*
         getMaxValueOfId();
         //Sincronizam instanta bazei de date
         synchronized (instance) {
@@ -99,5 +100,7 @@ public class DatabaseClass extends Thread{
                 }
             }
         }
+
+         */
     }
 }
