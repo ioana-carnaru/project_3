@@ -16,22 +16,25 @@ public class SignUpFrame extends Frames {
     JLabel passwordLabel;
     JPasswordField passwordField;
     SubmitSignUpButton submitSignUpButton;
+    BackButton backButton;
 
     private SignUpFrame () {
         super("Create new account", 300, 300);
-        this.setLayout(new GridLayout(7, 1));
+        this.setLayout(new GridLayout(7, 1, 0, 5));
 
         usernameLabel = new JLabel("Username:");
         usernameField = new JTextField();
         passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField();
         submitSignUpButton = new SubmitSignUpButton("Submit");
+        backButton = new BackButton("Back");
 
         this.add(usernameLabel);
         this.add(usernameField);
         this.add(passwordLabel);
         this.add(passwordField);
         this.add(submitSignUpButton);
+        this.add(backButton);
 
         this.setVisible(true);
     }
@@ -43,10 +46,6 @@ public class SignUpFrame extends Frames {
         return  signUpFrame;
     }
 
-    public SubmitSignUpButton getSubmitSignUpButton()
-    {
-        return   signUpFrame.submitSignUpButton;
-    }
     public static void disposeFrame () {
         signUpFrame.dispose();
         signUpFrame = null;
