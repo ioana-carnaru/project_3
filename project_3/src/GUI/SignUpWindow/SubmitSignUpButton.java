@@ -21,6 +21,7 @@ public class SubmitSignUpButton extends Buttons {
         this._user=SignInFrame.getFrame().getUsernameField().getText();
         this._hasInput=true;
         this._wantsToSignUp=true;
+        System.out.println("Am apasat butonul de sign up");
     }
     public String getPassword()
     {

@@ -20,6 +20,7 @@ public class SubmitSignInButton extends Buttons {
         this._user=SignInFrame.getFrame().getUsernameField().getText();
         this._hasInput=true;
         this._wantsToSignIn=true;
+        System.out.println("Am apasat butonul de sign in");
     }
     public String getPassword()
     {
