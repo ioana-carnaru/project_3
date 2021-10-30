@@ -1,18 +1,13 @@
 package MainPackage;
 
-import GUI.firstWindow.FirstFrame;
+import GUI.GUIThread;
 
 import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        Runnable guiRunnable = new Runnable() {
-            @Override
-            public void run() {
-                FirstFrame.getFrame();
-            }
-        };
+        GUIThread guiThread = new GUIThread();
 
-        SwingUtilities.invokeLater(guiRunnable);
+        SwingUtilities.invokeLater(guiThread);
     }
 }
