@@ -1,18 +1,18 @@
-package GUI.signInWindow;
+package GUI.SignUpWindow;
 
 import GUI.AbstractClasses.Buttons;
 
 import java.awt.event.ActionEvent;
 
-public class SubmitSignInButton extends Buttons {
+public class SubmitSignUpButton extends Buttons {
 
-    public SubmitSignInButton (String text) {
+    public SubmitSignUpButton (String text) {
         super(text);
         this.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Sign In");
+        System.out.println("Sign Up");
     }
 }

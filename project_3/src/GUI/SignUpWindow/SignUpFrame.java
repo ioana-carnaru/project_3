@@ -1,43 +1,42 @@
-package GUI.signInWindow;
+package GUI.SignUpWindow;
 
 import GUI.AbstractClasses.Frames;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SignInFrame extends Frames {
+public class SignUpFrame extends Frames {
 
-    private static SignInFrame frame;
+    private static SignUpFrame frame;
 
     JLabel usernameLabel;
     JTextField usernameField;
     JLabel passwordLabel;
     JPasswordField passwordField;
-    SubmitSignInButton submitSignInButton;
+    SubmitSignUpButton submitSignUpButton;
 
-
-    private SignInFrame () {
-        super("Log to an existing account", 300, 300);
+    private SignUpFrame () {
+        super("Create new account", 300, 300);
         this.setLayout(new GridLayout(7, 1));
 
         usernameLabel = new JLabel("Username:");
         usernameField = new JTextField();
         passwordLabel = new JLabel("Password:");
         passwordField = new JPasswordField();
-        submitSignInButton = new SubmitSignInButton("Submit");
+        submitSignUpButton = new SubmitSignUpButton("Submit");
 
         this.add(usernameLabel);
         this.add(usernameField);
         this.add(passwordLabel);
         this.add(passwordField);
-        this.add(submitSignInButton);
+        this.add(submitSignUpButton);
 
         this.setVisible(true);
     }
 
-    public static SignInFrame getFrame () {
+    public static SignUpFrame getFrame () {
         if (frame == null)
-            frame = new SignInFrame();
+            frame = new SignUpFrame();
 
         return frame;
     }
