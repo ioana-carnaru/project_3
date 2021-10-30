@@ -7,6 +7,7 @@ There are 2 major roles:
 - User role:
   - can request a new object
   - can return an object from his inventory
+  - can see his inventory
 
 - Admin role: 
   - can do everything that the user can do
@@ -14,4 +15,4 @@ There are 2 major roles:
   - receives all the requests from users
 
 
-All the users and their inventory will be saved in a database
+All the users and their inventory will be saved in a database.
