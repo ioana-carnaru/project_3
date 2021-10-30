@@ -15,7 +15,7 @@ public class SignInButton extends Buttons {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        FirstFrame.frame.dispose();
-        SignInFrame.frame = new SignInFrame();
+        FirstFrame.disposeFrame();
+        SignInFrame.getFrame();
     }
 }

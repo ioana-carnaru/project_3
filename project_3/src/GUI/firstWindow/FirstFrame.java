@@ -6,12 +6,11 @@ import java.awt.*;
 
 public class FirstFrame extends Frames {
 
-    public static FirstFrame frame;
+    private static FirstFrame frame;
 
     SignInButton button;
 
-
-    public FirstFrame() {
+    private FirstFrame() {
         super("Inventory Management", 400, 400);
         this.setLayout(new FlowLayout());
 
@@ -20,5 +19,17 @@ public class FirstFrame extends Frames {
         this.add(button);
 
         this.setVisible(true);
+    }
+
+    public static FirstFrame getFrame () {
+        if (frame == null)
+            frame = new FirstFrame();
+
+        return frame;
+    }
+
+    public static void disposeFrame () {
+        frame.dispose();
+        frame = null;
     }
 }

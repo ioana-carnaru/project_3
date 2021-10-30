@@ -10,7 +10,7 @@ public abstract class Frames extends JFrame {
     }
 
     public Frames (String title, int width, int height) {
-        this(title);
+        this(title); // call the other constructor
         this.setSize(width, height);
     }
 }
