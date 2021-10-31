@@ -35,11 +35,13 @@ public class SubmitSignInButton extends Buttons {
                 queue.enqueue(password);
             }
 
+            /*
             synchronized (queue) { // IT WORKS !!!!!
                 System.out.println(queue.dequeue());
                 System.out.println(queue.dequeue());
                 System.out.println(queue.dequeue());
             }
+            */
 
         } catch (InvalidUsernameException exception) {
             JOptionPane.showMessageDialog(null, "The username must be between 4 and 20 characters", "Username error", JOptionPane.ERROR_MESSAGE);

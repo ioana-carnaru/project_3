@@ -1,17 +1,15 @@
 package DatabasePackage;
 
 
-import GUI.SignUpWindow.SignUpFrame;
-import GUI.signInWindow.SignInFrame;
-import GUI.signInWindow.SubmitSignInButton;
-import GUI.firstWindow.FirstFrame;
-import  GUI.firstWindow.SignInButton;
+import DataStructures.IQueue;
+import MainPackage.Main;
+
 import java.sql.*;
 
-public class DatabaseClass extends Thread{
+public class DatabaseClass extends Thread {
     private static DatabaseClass instance;
     private Connection con;
-    private int _idCounter=0;
+    private int _idCounter = 0;
 
     private DatabaseClass() {
         try {
@@ -35,35 +33,33 @@ public class DatabaseClass extends Thread{
     public Connection getCon() {
         return con;
     }
-    public void getMaxValueOfId()
-    {
+
+    public void getMaxValueOfId() {
         try {
             Statement stm = con.createStatement();
             ResultSet rs = stm.executeQuery("SELECT MAX(id) from people as Max;");
 
-            if(rs.next())
-            {
-                _idCounter=rs.getInt(1)+1;
+            if (rs.next()) {
+                _idCounter = rs.getInt(1) + 1;
             }
             stm.close();
-        }
-        catch(SQLException ex)
-        {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+
     public void run() {
-        /*
+
         getMaxValueOfId();
         //Sincronizam instanta bazei de date
         synchronized (instance) {
             while (true) {
                 //verificam daca am apasat pe submit
-                if (!SignInFrame.getFrame().getSubmitSignInButton().getHasInput() && !SignUpFrame.getFrame().getSubmitSignUpButton().getHasInputForSignUp()) {
+                if (Main.queue.isEmpty()) {
                     //cat timp nu
                     try {
                         //asteptam
-                      //   System.out.println("We are waiting for input");
+                        //   System.out.println("We are waiting for input");
                         wait(10);
                     } catch (InterruptedException ex) {
                         ex.printStackTrace();
@@ -71,7 +67,42 @@ public class DatabaseClass extends Thread{
                     //altfel efectuam un query cu datele pe care le-am citit din SubmitSignInButtonClass si le introducem intr-un result set. Daca result set e null, adica nu sunt valori valide in baza, at nu avem valori;
                 } else {
                     try {
-                        if (SignInFrame.getFrame().getSubmitSignInButton().is_wantsToSignIn()) {
+                        String typeOfAction = Main.queue.dequeue();
+                        System.out.println(typeOfAction);
+                        if (typeOfAction.equals(IQueue.logIn)) {
+                            String nameUser = Main.queue.dequeue();
+                            String passwordUser = Main.queue.dequeue();
+                            String searchForUser = "select * from people where userName='" +nameUser+"' and passwordUser='"+passwordUser+"';";
+                            System.out.println(searchForUser);
+                            System.out.println(nameUser + "     " + passwordUser);
+                            Statement stm = con.createStatement();
+                            ResultSet rs = stm.executeQuery(searchForUser);
+                            if (rs.next()) {
+                                System.out.println("Am gasit valori");
+                            } else {
+                                System.out.println("Nu am gasit valori");
+                            }
+                            stm.close();
+                        } else if (typeOfAction.equals((IQueue.newAccount))) {
+                            String nameUser = Main.queue.dequeue();
+                            String passwordUser = Main.queue.dequeue();
+                            Statement stm = con.createStatement();
+                            String insertTheUser = "INSERT INTO people VALUES ('" + _idCounter + "','" + nameUser + "','" + passwordUser + "')";
+                            stm.executeUpdate(insertTheUser);
+                            this._idCounter++;
+                            stm.close();
+                        }
+                        notify();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+}
+/*  Incercarea initiala
+  if (SignInFrame.getFrame().getSubmitSignInButton().is_wantsToSignIn()) {
                             System.out.println("Want to search for items such as " + SignInFrame.getFrame().getSubmitSignInButton().getUser() + " and " + SignInFrame.getFrame().getSubmitSignInButton().getPassword());
                             Statement stm = con.createStatement();
                             ResultSet rs = stm.executeQuery("select * from people where userName='" + SignInFrame.getFrame().getSubmitSignInButton().getUser() + "';");
@@ -92,15 +123,5 @@ public class DatabaseClass extends Thread{
                         }
                         //Resetam inputul
                         SignInFrame.getFrame().getSubmitSignInButton().set_hasInput(false);
-                        SignUpFrame.getFrame().getSubmitSignUpButton().set_hasInput(false);
-                        notify();
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        }
-
-         */
-    }
-}
+                        SignUpFrame.getFrame().getSubmitSignUpButton().set_hasInput(false);*/
+// notify();

@@ -4,6 +4,7 @@ import CustomExceptions.InvalidPasswordException;
 import CustomExceptions.InvalidUsernameException;
 import DataStructures.Queue;
 import GUI.AbstractClasses.Buttons;
+import GUI.signInWindow.SignInFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -35,11 +36,13 @@ public class SubmitSignUpButton extends Buttons {
                 queue.enqueue(password);
             }
 
+            /*
             synchronized (queue) { // IT WORKS !!!!!
                 System.out.println(queue.dequeue());
                 System.out.println(queue.dequeue());
                 System.out.println(queue.dequeue());
             }
+            */
 
         } catch (InvalidUsernameException exception) {
             JOptionPane.showMessageDialog(null, "The username must be between 4 and 20 characters", "Username error", JOptionPane.ERROR_MESSAGE);
