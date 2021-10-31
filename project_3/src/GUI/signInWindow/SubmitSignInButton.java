@@ -52,6 +52,10 @@ public class SubmitSignInButton extends Buttons {
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(null, "Something went wrong", "Sign In failed", JOptionPane.ERROR_MESSAGE);
         }
+        if(SignInFrame.getFrame().getIsSignedIn())
+        {
+            System.out.println("Ne-am logat cu succes");
+        }
     }
 
 }

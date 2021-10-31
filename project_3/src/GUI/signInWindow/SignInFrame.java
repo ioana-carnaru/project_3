@@ -15,6 +15,7 @@ public class SignInFrame extends Frames {
     JPasswordField passwordField;
     SubmitSignInButton submitSignInButton;
     BackButton backButton;
+    private boolean isSignedIn=false;
 
 
     private SignInFrame () {
@@ -48,6 +49,14 @@ public class SignInFrame extends Frames {
     public static void disposeFrame () {
         signInFrame.dispose();
         signInFrame = null;
+    }
+    public void setIsSignedIn(boolean bool)
+    {
+        this.isSignedIn=bool;
+    }
+    public boolean getIsSignedIn()
+    {
+        return isSignedIn;
     }
 
 }
