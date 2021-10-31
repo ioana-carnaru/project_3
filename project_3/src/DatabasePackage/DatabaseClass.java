@@ -2,8 +2,10 @@ package DatabasePackage;
 
 
 import DataStructures.IQueue;
+import GUI.signInWindow.SignInFrame;
 import MainPackage.Main;
 
+import javax.swing.*;
 import java.sql.*;
 
 public class DatabaseClass extends Thread {
@@ -34,23 +36,23 @@ public class DatabaseClass extends Thread {
         return con;
     }
 
-    public void getMaxValueOfId() {
-        try {
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT MAX(id) from people as Max;");
+    /* public void getMaxValueOfId() {
+         try {
+             Statement stm = con.createStatement();
+             ResultSet rs = stm.executeQuery("SELECT MAX(id) from people as Max;");
 
-            if (rs.next()) {
-                _idCounter = rs.getInt(1) + 1;
-            }
-            stm.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-    }
-
+             if (rs.next()) {
+                 _idCounter = rs.getInt(1) + 1;
+             }
+             stm.close();
+         } catch (SQLException ex) {
+             ex.printStackTrace();
+         }
+     }
+ */
     public void run() {
 
-        getMaxValueOfId();
+        // getMaxValueOfId();
         //Sincronizam instanta bazei de date
         synchronized (instance) {
             while (true) {
@@ -72,13 +74,14 @@ public class DatabaseClass extends Thread {
                         if (typeOfAction.equals(IQueue.logIn)) {
                             String nameUser = Main.queue.dequeue();
                             String passwordUser = Main.queue.dequeue();
-                            String searchForUser = "select * from people where userName='" +nameUser+"' and passwordUser='"+passwordUser+"';";
+                            String searchForUser = "select * from people where userName='" + nameUser + "' and passwordUser='" + passwordUser + "';";
                             System.out.println(searchForUser);
                             System.out.println(nameUser + "     " + passwordUser);
                             Statement stm = con.createStatement();
                             ResultSet rs = stm.executeQuery(searchForUser);
                             if (rs.next()) {
                                 System.out.println("Am gasit valori");
+                                SignInFrame.getFrame().setIsSignedIn(true);
                             } else {
                                 System.out.println("Nu am gasit valori");
                             }
@@ -87,14 +90,15 @@ public class DatabaseClass extends Thread {
                             String nameUser = Main.queue.dequeue();
                             String passwordUser = Main.queue.dequeue();
                             Statement stm = con.createStatement();
-                            String insertTheUser = "INSERT INTO people VALUES ('" + _idCounter + "','" + nameUser + "','" + passwordUser + "')";
+                            String insertTheUser = "INSERT INTO people VALUES ('" + nameUser + "','" + passwordUser + "')";
                             stm.executeUpdate(insertTheUser);
-                            this._idCounter++;
+                            //this._idCounter++;
                             stm.close();
                         }
                         notify();
                     } catch (SQLException ex) {
-                        ex.printStackTrace();
+                        //ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "The username already exists", "Username error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
