@@ -5,6 +5,7 @@ import GUI.AbstractClasses.Frames;
 
 import java.awt.*;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import static MainPackage.Main.queue;
 
@@ -28,7 +29,18 @@ public class UserFrame extends Frames {
             queue.enqueue(IQueue.showInventory);
         }
 
-        addItemButton = new AddItemButton("Add Item");
+        try {
+            while (resultSet == null || resultSet.next() == false)
+                Thread.sleep(10);
+
+            while (resultSet.next()) {
+                System.out.println(resultSet.getString(0) + " " + resultSet.getString(1) + " " + resultSet.getString(2));
+            }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
         this.add(addItemButton);
         this.setVisible(true);
     }
