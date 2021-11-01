@@ -25,17 +25,7 @@ public class UserFrame extends Frames {
         this.setSize(300, 300);
         this.setLayout(new FlowLayout());
 
-   /* try {
-        Thread.sleep(1000);
-        while (resultSet!=null) {
-            System.out.println(resultSet.getString("username") + " " + resultSet.getInt("iditem") + " " + resultSet.getInt("quantity"));
-        }
-    }
-    catch (SQLException | InterruptedException ex)
-    {
-        ex.printStackTrace();
-    }*/
-      //this.add(addItemButton);
+ 
         this.setVisible(true);
     }
 
@@ -44,6 +34,11 @@ public class UserFrame extends Frames {
             frame = new UserFrame(username);
 
         return frame;
+    }
+
+    public static void disposeFrame() {
+        frame.dispose();
+        frame = null;
     }
 
 
