@@ -14,9 +14,9 @@ public class UserFrame extends Frames {
     private static UserFrame frame;
     private String username = null;
 
-    private ResultSet resultSet;
+    private ResultSet resultSet=null;
 
-    AddItemButton addItemButton;
+    //AddItemButton addItemButton;
 
 
     private UserFrame (String username) {
@@ -25,23 +25,17 @@ public class UserFrame extends Frames {
         this.setSize(300, 300);
         this.setLayout(new FlowLayout());
 
-        synchronized (queue) {
-            queue.enqueue(IQueue.showInventory);
+   /* try {
+        Thread.sleep(1000);
+        while (resultSet!=null) {
+            System.out.println(resultSet.getString("username") + " " + resultSet.getInt("iditem") + " " + resultSet.getInt("quantity"));
         }
-
-        try {
-            while (resultSet == null || resultSet.next() == false)
-                Thread.sleep(10);
-
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString(0) + " " + resultSet.getString(1) + " " + resultSet.getString(2));
-            }
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
-
-        this.add(addItemButton);
+    }
+    catch (SQLException | InterruptedException ex)
+    {
+        ex.printStackTrace();
+    }*/
+      //this.add(addItemButton);
         this.setVisible(true);
     }
 
@@ -60,4 +54,16 @@ public class UserFrame extends Frames {
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
     }
+//    public void ShowRes()
+//    {
+//        try {
+//            while (resultSet.next()) {
+//                System.out.println(resultSet.getString("username") + " " + resultSet.getInt("iditem") + " " + resultSet.getInt("quantity"));
+//            }
+//        }
+//        catch (SQLException ex)
+//        {
+//            ex.printStackTrace();
+//        }
+//    }
 }
