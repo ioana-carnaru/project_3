@@ -2,6 +2,7 @@ package DatabasePackage;
 
 
 import DataStructures.IQueue;
+import GUI.UserWindow.UserFrame;
 import GUI.signInWindow.SignInFrame;
 import MainPackage.Main;
 
@@ -15,7 +16,7 @@ public class DatabaseClass extends Thread {
 
     private DatabaseClass() {
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-video", "root", "toor");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory_management", "root", "toor");
             System.out.println("Conexiune reusita");
             setDaemon(true);
         } catch (Exception e) {
@@ -74,7 +75,7 @@ public class DatabaseClass extends Thread {
                         if (typeOfAction.equals(IQueue.logIn)) {
                             String nameUser = Main.queue.dequeue();
                             String passwordUser = Main.queue.dequeue();
-                            String searchForUser = "select * from people where userName='" + nameUser + "' and passwordUser='" + passwordUser + "';";
+                            String searchForUser = "select * from users where username='" + nameUser + "' and password='" + passwordUser + "';";
                             System.out.println(searchForUser);
                             System.out.println(nameUser + "     " + passwordUser);
                             Statement stm = con.createStatement();
@@ -82,6 +83,9 @@ public class DatabaseClass extends Thread {
                             if (rs.next()) {
                                 System.out.println("Am gasit valori");
                                 SignInFrame.getFrame().setIsSignedIn(true);
+                                String lookForItemsForUser="select * from people where ";
+                                ResultSet resultSet;
+                               // UserFrame.getFrame("").setResultSet(resultSet);
                                 notifyAll();
                             } else {
                                 System.out.println("Nu am gasit valori");
@@ -91,7 +95,7 @@ public class DatabaseClass extends Thread {
                             String nameUser = Main.queue.dequeue();
                             String passwordUser = Main.queue.dequeue();
                             Statement stm = con.createStatement();
-                            String insertTheUser = "INSERT INTO people VALUES ('" + nameUser + "','" + passwordUser + "')";
+                            String insertTheUser = "INSERT INTO users VALUES ('" + nameUser + "','" + passwordUser + "')";
                             stm.executeUpdate(insertTheUser);
                             //this._idCounter++;
                             stm.close();
