@@ -4,6 +4,7 @@ import CustomExceptions.InvalidPasswordException;
 import CustomExceptions.InvalidUsernameException;
 import DataStructures.Queue;
 import GUI.AbstractClasses.Buttons;
+import GUI.UserWindow.UserFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -52,6 +53,7 @@ public class SubmitSignInButton extends Buttons {
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(null, "Something went wrong", "Sign In failed", JOptionPane.ERROR_MESSAGE);
         }
+
         try {
             Thread.sleep(100);
             System.out.println("The SignInButton was pressed and the user and password that we are searching for are in the databse:"+ SignInFrame.getFrame().getIsSignedIn());
@@ -60,9 +62,11 @@ public class SubmitSignInButton extends Buttons {
         {
             ex.printStackTrace();
         }
+
         if(SignInFrame.getFrame().getIsSignedIn())
         {
-            //we go into user frame
+            UserFrame.getFrame(username);
+            SignInFrame.disposeFrame();
         }
     }
 
