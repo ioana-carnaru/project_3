@@ -52,9 +52,17 @@ public class SubmitSignInButton extends Buttons {
         } catch (Exception exception) {
             JOptionPane.showMessageDialog(null, "Something went wrong", "Sign In failed", JOptionPane.ERROR_MESSAGE);
         }
+        try {
+            Thread.sleep(100);
+            System.out.println("The SignInButton was pressed and the user and password that we are searching for are in the databse:"+ SignInFrame.getFrame().getIsSignedIn());
+        }
+        catch(InterruptedException ex)
+        {
+            ex.printStackTrace();
+        }
         if(SignInFrame.getFrame().getIsSignedIn())
         {
-            System.out.println("Ne-am logat cu succes");
+            //we go into user frame
         }
     }
 

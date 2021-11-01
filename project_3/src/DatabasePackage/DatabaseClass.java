@@ -82,6 +82,7 @@ public class DatabaseClass extends Thread {
                             if (rs.next()) {
                                 System.out.println("Am gasit valori");
                                 SignInFrame.getFrame().setIsSignedIn(true);
+                                notifyAll();
                             } else {
                                 System.out.println("Nu am gasit valori");
                             }
