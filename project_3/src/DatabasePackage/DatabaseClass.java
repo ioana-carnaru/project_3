@@ -91,8 +91,8 @@ public class DatabaseClass extends Thread {
                                 }*/
                                 wait(1000);
                                 UserFrame.getFrame("").setResultSet(resultSetItemsForUser);
-                                statementForItemsUser.close();
-                                stm.close();
+                                //statementForItemsUser.close();
+                                //stm.close();
                                // notifyAll();
 
                             } else {

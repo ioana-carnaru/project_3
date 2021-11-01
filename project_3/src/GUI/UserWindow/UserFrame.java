@@ -18,6 +18,9 @@ public class UserFrame extends Frames {
 
     //AddItemButton addItemButton;
 
+    AddItemButton addItemButton;
+    DisplayButton displayButton;
+
 
     private UserFrame (String username) {
         super(username);
@@ -25,6 +28,11 @@ public class UserFrame extends Frames {
         this.setSize(300, 300);
         this.setLayout(new FlowLayout());
 
+        displayButton = new DisplayButton("Display Inventory");
+        addItemButton = new AddItemButton("Add new item");
+
+        this.add(displayButton);
+        this.add(addItemButton);
  
         this.setVisible(true);
     }
