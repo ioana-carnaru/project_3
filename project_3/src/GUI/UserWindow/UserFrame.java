@@ -30,12 +30,12 @@ public class UserFrame extends Frames {
         }
 
         try {
-            while (resultSet == null || resultSet.next() == false)
-                Thread.sleep(10);
-
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString(0) + " " + resultSet.getString(1) + " " + resultSet.getString(2));
-            }
+//            while (resultSet == null || resultSet.next() == false)
+//                Thread.sleep(10);
+//
+//            while (resultSet.next()) {
+//                System.out.println(resultSet.getString(0) + " " + resultSet.getString(1) + " " + resultSet.getString(2));
+//            }
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -50,6 +50,11 @@ public class UserFrame extends Frames {
             frame = new UserFrame(username);
 
         return frame;
+    }
+
+    public static void disposeFrame() {
+        frame.dispose();
+        frame = null;
     }
 
 
