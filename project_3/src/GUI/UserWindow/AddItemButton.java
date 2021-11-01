@@ -14,6 +14,6 @@ public class AddItemButton extends Buttons {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ;
+
     }
 }

@@ -76,22 +76,28 @@ public class DatabaseClass extends Thread {
                             String nameUser = Main.queue.dequeue();
                             String passwordUser = Main.queue.dequeue();
                             String searchForUser = "select * from users where username='" + nameUser + "' and password='" + passwordUser + "';";
-                            System.out.println(searchForUser);
-                            System.out.println(nameUser + "     " + passwordUser);
                             Statement stm = con.createStatement();
                             ResultSet rs = stm.executeQuery(searchForUser);
+
                             if (rs.next()) {
-                                System.out.println("Am gasit valori");
+                                System.out.println("Am gasit valori "+nameUser+" "+passwordUser);
                                 SignInFrame.getFrame().setIsSignedIn(true);
-                                String lookForItemsForUser="select * from inventory where  username='"+nameUser+"';";
-                                Statement statement= con.createStatement();
-                                ResultSet resultSet=statement.executeQuery(lookForItemsForUser);
-                                UserFrame.getFrame("").setResultSet(resultSet);
-                                notifyAll();
+                                Statement statementForItemsUser=con.createStatement();
+                                String searchForItemsForUser="Select * from inventory where username='"+nameUser+"';";
+                                ResultSet resultSetItemsForUser=statementForItemsUser.executeQuery(searchForItemsForUser);
+                               /* while(resultSetItemsForUser.next())
+                                {
+                                    System.out.println(resultSetItemsForUser.getString("username") + " " + resultSetItemsForUser.getInt("iditem") + " " + resultSetItemsForUser.getInt("quantity"));
+                                }*/
+                                wait(1000);
+                                UserFrame.getFrame("").setResultSet(resultSetItemsForUser);
+                                statementForItemsUser.close();
+                                stm.close();
+                               // notifyAll();
+
                             } else {
                                 System.out.println("Nu am gasit valori");
                             }
-                            stm.close();
                         } else if (typeOfAction.equals((IQueue.newAccount))) {
                             String nameUser = Main.queue.dequeue();
                             String passwordUser = Main.queue.dequeue();
@@ -101,10 +107,11 @@ public class DatabaseClass extends Thread {
                             //this._idCounter++;
                             stm.close();
                         }
+
                         notify();
-                    } catch (SQLException ex) {
-                        //ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "The username already exists", "Username error", JOptionPane.ERROR_MESSAGE);
+                    } catch (SQLException | InterruptedException ex) {
+                        ex.printStackTrace();
+                        //JOptionPane.showMessageDialog(null, "The username already exists", "Username error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
