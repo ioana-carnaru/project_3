@@ -83,9 +83,10 @@ public class DatabaseClass extends Thread {
                             if (rs.next()) {
                                 System.out.println("Am gasit valori");
                                 SignInFrame.getFrame().setIsSignedIn(true);
-                                String lookForItemsForUser="select * from people where ";
-                                ResultSet resultSet;
-                               // UserFrame.getFrame("").setResultSet(resultSet);
+                                String lookForItemsForUser="select * from inventory where  username='"+nameUser+"';";
+                                Statement statement= con.createStatement();
+                                ResultSet resultSet=statement.executeQuery(lookForItemsForUser);
+                                UserFrame.getFrame("").setResultSet(resultSet);
                                 notifyAll();
                             } else {
                                 System.out.println("Nu am gasit valori");
