@@ -10,6 +10,7 @@ public class AddNewItemFrame extends Frames {
 
     private static AddNewItemFrame frame;
     private ResultSet resultSet;
+    private String username;
     private JPanel panel;
 
     JLabel idItemLabel;
@@ -22,9 +23,10 @@ public class AddNewItemFrame extends Frames {
     JTextField descriptionField;
     SubmitNewItemButton submitNewItemButton;
 
-    private AddNewItemFrame(String title, ResultSet resultSet) {
+    private AddNewItemFrame(String title, String username, ResultSet resultSet) {
         super(title, 300, 300);
         this.resultSet = resultSet;
+        this.username = username;
 
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -57,15 +59,19 @@ public class AddNewItemFrame extends Frames {
         this.setVisible(true);
     }
 
-    public static AddNewItemFrame getFrame (ResultSet resultSet) {
+    public static AddNewItemFrame getFrame (String username, ResultSet resultSet) {
         if (frame == null)
-            frame = new AddNewItemFrame("Add new Item", resultSet);
+            frame = new AddNewItemFrame("Add new Item", username, resultSet);
 
         return frame;
     }
 
-    public void disposeFrame () {
+    public static void disposeFrame () {
         frame.disposeFrame();
         frame = null;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

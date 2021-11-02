@@ -13,7 +13,7 @@ public class AddItemButton extends Buttons { // in UserFrame
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        AddNewItemFrame.getFrame(UserFrame.getFrame("").getResultSet());
+        AddNewItemFrame.getFrame(UserFrame.getFrame("").getUsername(), UserFrame.getFrame("").getResultSet());
         UserFrame.disposeFrame();
     }
 }

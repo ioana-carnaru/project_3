@@ -57,7 +57,12 @@ public class UserFrame extends Frames {
     public void setResultSet(ResultSet resultSet) {
         this.resultSet = resultSet;
     }
-//    public void ShowRes()
+
+    public String getUsername() {
+        return username;
+    }
+
+    //    public void ShowRes()
 //    {
 //        try {
 //            while (resultSet.next()) {
