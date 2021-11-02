@@ -7,6 +7,7 @@ import GUI.signInWindow.SignInFrame;
 import MainPackage.Main;
 
 import javax.swing.*;
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 
 public class DatabaseClass extends Thread {
@@ -107,6 +108,30 @@ public class DatabaseClass extends Thread {
                             //this._idCounter++;
                             stm.close();
                         }
+                        else if(typeOfAction.equals(IQueue.newItem))
+                        {
+                            String u=Main.queue.dequeue();
+                            int idItem= Integer.valueOf(Main.queue.dequeue());
+                            String itName=Main.queue.dequeue();
+                            int q=Integer.valueOf(Main.queue.dequeue());
+                            String desc=Main.queue.dequeue();
+                            Statement insert=con.createStatement();
+                            if(WeHaveTheItem(idItem))
+                            {
+                                System.out.println("We have the item");
+                                if(WeHaveTheItemForTheUser(idItem,u))
+                                {
+                                    System.out.println("We have the item in the possesion of the user");
+                                    int aux=getInitialQ(idItem,u)+q;
+
+                                    String update="Update inventory set quantity="+aux+" where username='"+u+"' and iditem="+idItem+";";
+                                    insert.executeUpdate(update);
+                                }
+                                String insertTheBorrowedItem="Insert into inventory values('"+u+"',"+idItem+","+q+");";
+                                insert.executeUpdate(insertTheBorrowedItem);
+                            }
+                            insert.close();
+                        }
 
                         notify();
                     } catch (SQLException | InterruptedException ex) {
@@ -116,6 +141,61 @@ public class DatabaseClass extends Thread {
                 }
             }
         }
+    }
+    private boolean WeHaveTheItem(int id)
+    {
+        try {
+            Statement stm = con.createStatement();
+            String check = "Select * from items where iditems='" + id + "';";
+            ResultSet rs = stm.executeQuery(check);
+            if (rs.next())
+                return true;
+            return false;
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+
+    }
+    private boolean WeHaveTheItemForTheUser(int id, String u)
+    {
+        try {
+            Statement stm = con.createStatement();
+            String check = "Select * from inventory where iditem=" + id + " and username='" + u + "';";
+            ResultSet rs = stm.executeQuery(check);
+            if (rs.next())
+                return true;
+            return false;
+        }
+        catch (SQLException ex)
+    {
+        ex.printStackTrace();
+        return false;
+    }
+    }
+    private int getInitialQ(int id, String u)
+    {
+        ResultSet rs=null;
+        try {
+            Statement stm = con.createStatement();
+            String check = "Select * from inventory where iditem=" + id + " and username='" + u + "';";
+            rs = stm.executeQuery(check);
+            if(rs.next()) {
+                int h = rs.getInt("quantity");
+                System.out.println(h);
+                return h;
+            }
+            else return -1;
+        }
+        catch (SQLException ex)
+        {
+            ex.printStackTrace();
+           return -1;
+        }
+
+
     }
 }
 /*  Incercarea initiala
