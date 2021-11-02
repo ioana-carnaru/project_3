@@ -90,7 +90,7 @@ public class DatabaseClass extends Thread {
                                 {
                                     System.out.println(resultSetItemsForUser.getString("username") + " " + resultSetItemsForUser.getInt("iditem") + " " + resultSetItemsForUser.getInt("quantity"));
                                 }*/
-                                wait(1000);
+                                wait(100);
                                 UserFrame.getFrame("").setResultSet(resultSetItemsForUser);
                                 //statementForItemsUser.close();
                                 //stm.close();
