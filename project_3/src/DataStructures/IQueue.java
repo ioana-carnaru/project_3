@@ -4,6 +4,7 @@ public interface IQueue {
     String newAccount = "NEW ACCOUNT"; // create a new account
     String logIn = "LOG IN"; // log to an existing account
     String showInventory = "GIMME MY DATA"; // displays the current inventory of an user
+    String newItem = "NEW ITEM"; // adds a new item to the inventory of the current user
 
     void enqueue(String item); // adds a new item to the queue
     String dequeue(); // extracts an item from the queue
